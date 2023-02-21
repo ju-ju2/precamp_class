@@ -1,7 +1,7 @@
 export default function CounterStatePage() {
   function onClickCountUp() {
     const count = Number(document.getElementById("count").innerText);
-    // id에 담긴애는 숫자가 아니라 문자영 0이라 숫자로 바꾸는 과정이 필요함
+    // id에 담긴애는 숫자가 아니라 문자열 0이라 숫자로 바꾸는 과정이 필요함
     document.getElementById("count").innerText = count + 1;
   }
 

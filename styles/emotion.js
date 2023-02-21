@@ -8,3 +8,8 @@ export const Email = styled.div`
 export const EmailInput = styled.input`
   width: 500px;
 `;
+
+export const ErrorMassage = styled.div`
+  font-size: 10px;
+  color: red;
+`;
