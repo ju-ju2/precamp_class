@@ -4,24 +4,12 @@
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 
-//$는 변수라는 말
-// const CREATE_BOARD = gql`
-//   mutation createBoard($writer: String, $title: String, $contents: String) { //변수의 타입 적는 란
-//     createBoard(
-//       writer: $writer                  //실제 우리가 전달할 변수
-//       title: $title
-//       contents: $contents
-//     ) {
-//       _id
-//       number
-//       message
-//     }
-//   }
-// `
-
-const CREATE_BOARD = gql`
-  mutation typeSetting($writer: String, $title: String, $contents: String) {
-    createBoard(writer: $writer, title: $title, contents: $contents) {
+const CREATE_PRODUCT = gql`
+  mutation typeSetting(
+    $seller: String
+    $createProductInput: CreateProductInput!
+  ) {
+    createProduct(seller: $seller, createProductInput: $createProductInput) {
       _id
       number
       message
@@ -30,44 +18,54 @@ const CREATE_BOARD = gql`
 `;
 
 export default function GraphqlMutationPage() {
-  const [writer, setWriter] = useState("");
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
+  const [seller, setSeller] = useState("");
+  const [name, setName] = useState("");
+  const [detail, setDetail] = useState("");
+  const [price, setPrice] = useState("");
 
-  const [나의함수] = useMutation(CREATE_BOARD);
+  const [나의함수] = useMutation(CREATE_PRODUCT);
 
   const onClickSubmit = async () => {
     const result = await 나의함수({
       variables: {
         //variables가 $역할을 해주기때문에 한번 더 쓸 필요 없다
-        writer: writer, //$writer 랑 state 변수 writer랑 같아도 상관없다, 아예 다른 놈임
-        title: title,
-        contents: contents,
+        seller: seller, //$writer 랑 state 변수 writer랑 같아도 상관없다, 아예 다른 놈임
+        createProductInput: {
+          name: name,
+          detail: detail,
+          price: price,
+        },
       },
     });
     console.log(result);
-    alert(result.data.createBoard.message);
+    alert(result.data.createProduct.message);
   };
 
-  const onChangeWriter = (event) => {
-    setWriter(event.target.value);
+  const onChangeSeller = (event) => {
+    setSeller(event.target.value);
   };
 
-  const onChangeTitle = (event) => {
-    setTitle(event.target.value);
+  const onChangeName = (event) => {
+    setName(event.target.value);
   };
 
-  const onChangeContents = (event) => {
-    setContents(event.target.value);
+  const onChangeDetail = (event) => {
+    setDetail(event.target.value);
+  };
+
+  const onChangePrice = (event) => {
+    setPrice(Number(event.target.value)); //넘버링 해주기
   };
 
   return (
     <>
-      작성자: <input type="text" onChange={onChangeWriter}></input>
+      작성자: <input type="text" onChange={onChangeSeller}></input>
       <br />
-      제목: <input type="text" onChange={onChangeTitle}></input>
+      제품이름: <input type="text" onChange={onChangeName}></input>
       <br />
-      내용: <input type="text" onChange={onChangeContents}></input>
+      세부사항: <input type="text" onChange={onChangeDetail}></input>
+      <br />
+      가격: <input type="text" onChange={onChangePrice}></input>
       <br />
       <button onClick={onClickSubmit}>GRAPHQL-API(동기)요청하기</button>
     </>
