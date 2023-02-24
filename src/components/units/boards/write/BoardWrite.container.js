@@ -1,16 +1,7 @@
 import BoardWriteUI from "./boardWrite.presenter";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useState } from "react";
-
-const CREATE_BOARD = gql`
-  mutation typeSetting($writer: String, $title: String, $contents: String) {
-    createBoard(writer: $writer, title: $title, contents: $contents) {
-      _id
-      number
-      message
-    }
-  }
-`;
+import { CREATE_BOARD } from "./BoardWrite.queries";
 
 export default function BoardWrite() {
   //자바스크립트 영역

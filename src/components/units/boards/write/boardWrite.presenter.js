@@ -1,3 +1,5 @@
+import { BlueButton, RedInput } from "./BoardWrite.styles";
+
 export default function BoardWriteUI(props) {
   //  자바스크립트 영역
 
@@ -5,13 +7,15 @@ export default function BoardWriteUI(props) {
   return (
     <>
       <div>3.부모-자식-손자 메세지</div>
-      작성자: <input type="text" onChange={props.onChangeWriter}></input>
+      작성자: <RedInput type="text" onChange={props.onChangeWriter}></RedInput>
       <br />
       제목: <input type="text" onChange={props.onChangeTitle}></input>
       <br />
       내용: <input type="text" onChange={props.onChangeContents}></input>
       <br />
-      <button onClick={props.onClickSubmit}>GRAPHQL-API(동기)요청하기</button>
+      <BlueButton onClick={props.onClickSubmit}>
+        GRAPHQL-API(동기)요청하기
+      </BlueButton>
     </>
   );
 }
