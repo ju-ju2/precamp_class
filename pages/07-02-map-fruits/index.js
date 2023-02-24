@@ -67,11 +67,6 @@ export default function MapFruitsPage() {
   //   return <>{bbb}</>;
 
   //3번
-  const ccc = FRUIT.map((el) => (
-    <div>
-      {el.number} {el.title}
-    </div>
-  ));
 
   return (
     <>
