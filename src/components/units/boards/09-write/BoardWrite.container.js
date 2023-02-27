@@ -36,14 +36,24 @@ export default function BoardWrite(props) {
 
   //수정하기 뮤테이션 -> 수정된 상세페이지
   const onClickUpdate = async () => {
+    const myVariables = {
+      number: Number(router.query.number),
+    };
+    if (writer) myVariables.writer = writer;
+    if (title) myVariables.title = title;
+    if (contents) myVariables.contents = contents;
+    //수정되지 않는 값들을 굳이 뮤테이션 날리지 않기 위해
+    //초기값 ""을 보내지 않고 수정된 값만 보낼것이다.
+
     console.log(router.query.number);
     const result = await updateBoard({
-      variables: {
-        number: Number(router.query.number),
-        writer,
-        title,
-        contents,
-      },
+      // variables: {
+      //   number: Number(router.query.number),
+      //   writer,
+      //   title,
+      //   contents,
+      // },
+      variables: myVariables,
     });
     alert(result.data.updateBoard.message);
     router.push(`/09-01-boards/${result.data.updateBoard.number}`);
