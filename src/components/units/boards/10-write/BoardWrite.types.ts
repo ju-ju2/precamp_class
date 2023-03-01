@@ -1,8 +1,9 @@
 import { ChangeEvent } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardWriteProps {
   isEdit: boolean;
-  data?: any;
+  data?: Pick<IQuery, "fetchBoard">;
 }
 
 export interface IMyVariables {
@@ -20,7 +21,7 @@ export interface IBoardWriteUIProps {
   onChangeContents: (event: ChangeEvent<HTMLInputElement>) => void;
   myWidth: boolean;
   isEdit: boolean;
-  data: any;
+  data: Pick<IQuery, "fetchBoard">;
   //return이 없는 경우 보이드라고 한다
 }
 
