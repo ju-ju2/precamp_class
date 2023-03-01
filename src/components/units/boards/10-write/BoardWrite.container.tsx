@@ -3,13 +3,9 @@ import { useMutation } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { useRouter } from "next/router";
+import { IBoardWriteProps, IMyVariables } from "./BoardWrite.types";
 
-interface IProps {
-  isEdit: boolean;
-  data?: any;
-}
-
-export default function BoardWrite(props: IProps) {
+export default function BoardWrite(props: IBoardWriteProps) {
   //자바스크립트 영역
 
   const router = useRouter();
@@ -41,13 +37,6 @@ export default function BoardWrite(props: IProps) {
 
   //수정하기 뮤테이션 -> 수정된 상세페이지
   const onClickUpdate = async () => {
-    interface IMyVariables {
-      number: number;
-      writer?: string;
-      title?: string;
-      contents?: string;
-    }
-
     const myVariables: IMyVariables = {
       number: Number(router.query.number),
     };

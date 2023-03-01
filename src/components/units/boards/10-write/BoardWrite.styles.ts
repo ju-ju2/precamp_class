@@ -1,22 +1,17 @@
 import styled from "@emotion/styled";
+import { IBlueButtonProps } from "./BoardWrite.types";
 
 export const RedInput = styled.input`
   border-color: red;
 `;
 
-interface IProps {
-  rrr: string;
-  ggg: string;
-  zzz: boolean;
-}
-
 export const BlueButton = styled.button`
   // background-color: blue;
-  background-color: ${(props: IProps) => props.ggg};
-  font-size: ${(props: IProps) => {
+  background-color: ${(props: IBlueButtonProps) => props.ggg};
+  font-size: ${(props: IBlueButtonProps) => {
     return props.rrr;
   }};
-  width: ${(props: IProps) => (props.zzz ? "300px" : "default")};
+  width: ${(props: IBlueButtonProps) => (props.zzz ? "300px" : "default")};
 `;
 
 //1. props를 받기위해 인위적으로 함수를 생성해준다 : ${()=>{}}

@@ -1,21 +1,9 @@
 // import { BlueButton, RedInput } from "./BoardWrite.styles";
-import { ChangeEvent } from "react";
 import * as S from "./BoardWrite.styles";
+import { IBoardWriteUIProps } from "./BoardWrite.types";
 // 하나하나 다 가져오기엔 줄이 너무 길어지니까 다 가져오고 S로 받는다.
 
-interface IProps {
-  onClickSubmit: () => void;
-  onClickUpdate: () => void;
-  onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeContents: (event: ChangeEvent<HTMLInputElement>) => void;
-  myWidth: boolean;
-  isEdit: boolean;
-  data: any;
-  //return이 없는 경우 보이드라고 한다
-}
-
-export default function BoardWriteUI(props: IProps) {
+export default function BoardWriteUI(props: IBoardWriteUIProps) {
   //  자바스크립트 영역
 
   //html영역(return아래)
