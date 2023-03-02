@@ -1,5 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { AppProps } from "next/app";
+// import "antd/dist/antd.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
