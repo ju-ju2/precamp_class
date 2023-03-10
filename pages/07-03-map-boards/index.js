@@ -27,7 +27,7 @@ export default function StaticRoutedPage() {
   console.log(data);
   console.log(data?.fetchBoards);
 
-  //data?.fetchBoards 는 배열이기 때문에 map 가능
+  // data?.fetchBoards 는 배열이기 때문에 map 가능
 
   return (
     <>

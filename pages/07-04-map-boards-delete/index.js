@@ -42,7 +42,7 @@ export default function StaticRoutedPage() {
     const result = await deleteData({
       variables: {
         number: Number(event.target.id),
-        //event.target은 코드 라인을 가져온다. 그래서 버튼에 id를 주고 그 변수를 가져온다
+        // event.target은 코드 라인을 가져온다. 그래서 버튼에 id를 주고 그 변수를 가져온다
         // html에서 가져온 코드이기 때문에 항상 문자열이기 때문에 넘버링을 해줘야한다
       },
       refetchQueries: [{ query: FETCH_BOARDS }],

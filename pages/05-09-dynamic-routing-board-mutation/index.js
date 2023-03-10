@@ -22,12 +22,12 @@ export default function GraphqlMutationPage() {
   const [나의함수] = useMutation(CREATE_BOARD);
 
   const onClickSubmit = async () => {
-    //routing이 늘 성공하는 것은 아니기 때문에 try 시도해봐! 라는 표현을 쓴다
+    // routing이 늘 성공하는 것은 아니기 때문에 try 시도해봐! 라는 표현을 쓴다
     try {
       const result = await 나의함수({
         variables: {
-          //variables가 $역할을 해주기때문에 한번 더 쓸 필요 없다
-          writer: writer, //$writer 랑 state 변수 writer랑 같아도 상관없다, 아예 다른 놈임
+          // variables가 $역할을 해주기때문에 한번 더 쓸 필요 없다
+          writer: writer, // $writer 랑 state 변수 writer랑 같아도 상관없다, 아예 다른 놈임
           title: title,
           contents: contents,
         },
@@ -38,9 +38,9 @@ export default function GraphqlMutationPage() {
       // router.push("/05-10-dynamic-routed-board-mutation/" + result.data.createBoard.number)
       router.push(
         `/05-10-dynamic-routed-board-mutation/${result.data.createBoard.number}`
-      ); //템플릿 리터럴로 바꿔주기
+      ); // 템플릿 리터럴로 바꿔주기
     } catch (error) {
-      //try에 있는 내용을 시도하다가, 실패하면 아랫줄 모두 무시하고 catch가 실행됨
+      // try에 있는 내용을 시도하다가, 실패하면 아랫줄 모두 무시하고 catch가 실행됨
       alert(error.message);
     }
   };

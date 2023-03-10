@@ -5,7 +5,7 @@ export default function StaticRoutingPage() {
 
   const onClickMove = () => {
     router.push("/05-02-static-routed");
-    //router.push : 페이지를 이동할꺼에요
+    // router.push : 페이지를 이동할꺼에요
   };
 
   return (

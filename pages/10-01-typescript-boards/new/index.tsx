@@ -5,5 +5,5 @@ export default function GraphqlMutationPage() {
 
   // <>{BoardWrite({isEdit: false})}</>
   // 원래 형태는 위의 것임
-  //함수 안에 객체 반환해서 아래 컨테이너가 props를 받는것
+  // 함수 안에 객체 반환해서 아래 컨테이너가 props를 받는것
 }

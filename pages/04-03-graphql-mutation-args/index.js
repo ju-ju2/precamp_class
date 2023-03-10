@@ -1,9 +1,9 @@
-//args 는 arguments로 인자가 들어가는 것을 뜻한다
+// args 는 arguments로 인자가 들어가는 것을 뜻한다
 // 아래의 값들이 지정하는 것이 아닌 인풋창에 입역되는 값으로 들어가는 것
 
 import { gql, useMutation } from "@apollo/client";
 
-//$는 변수라는 말
+// $는 변수라는 말
 // const CREATE_BOARD = gql`
 //   mutation createBoard($writer: String, $title: String, $contents: String) { //변수의 타입 적는 란
 //     createBoard(
@@ -34,7 +34,7 @@ export default function GraphqlMutationPage() {
   const onClickSubmit = async () => {
     const result = await 나의함수({
       variables: {
-        //variables가 $역할을 해주기때문에 한번 더 쓸 필요 없다
+        // variables가 $역할을 해주기때문에 한번 더 쓸 필요 없다
         writer: "훈이",
         title: "안녕 나는 훈이",
         contents: "훈이 글입니다",

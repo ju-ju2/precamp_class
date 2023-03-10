@@ -15,7 +15,7 @@ const FETCH_BOARD = gql`
 `;
 
 export default function StaticRoutedPage() {
-  //useMutation은 내가 페이지에서 실행시켜야지만 실행되지만 useQuery는 페이지를 열자마자 실행된다.
+  // useMutation은 내가 페이지에서 실행시켜야지만 실행되지만 useQuery는 페이지를 열자마자 실행된다.
   // 그래서 데이터 값을 바로 넣어줘야한다
   const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
     FETCH_BOARD,
@@ -35,7 +35,7 @@ export default function StaticRoutedPage() {
       <div>{data ? data.fetchBoard?.title : "데이터를 받아오는 중입니다"}</div>
       {/* 삼항연산자 방식 */}
       <div>{data?.fetchBoard?.contents}</div>
-      {/* 옵셔널 체인 방식, 가장 많이 쓰이는 방식*/}
+      {/* 옵셔널 체인 방식, 가장 많이 쓰이는 방식 */}
     </>
   );
 }

@@ -5,7 +5,7 @@ export default function StaticRoutingPage() {
 
   const onClickMove1 = () => {
     router.push("/05-08-dynamic-routed-board-query/326");
-    //router.push : 페이지를 이동할꺼에요
+    // router.push : 페이지를 이동할꺼에요
     // /1 의 값은   [qqq]로 넘어간다
   };
   const onClickMove2 = () => {

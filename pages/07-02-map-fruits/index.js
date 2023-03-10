@@ -1,4 +1,4 @@
-//백엔드에서 받아온 데이터라고 가정(컴포넌트 위에 만든 이유 : 컴포넌트 리렌더링 되어도 다시 안만들어짐 )
+// 백엔드에서 받아온 데이터라고 가정(컴포넌트 위에 만든 이유 : 컴포넌트 리렌더링 되어도 다시 안만들어짐 )
 
 const FRUIT = [
   {
@@ -44,16 +44,16 @@ const FRUIT = [
 ];
 
 export default function MapFruitsPage() {
-  //1번
+  // 1번
   const aaa = [
     <div>1 레드향</div>,
     <div>2 샤인머스켓</div>,
     <div>3 산청딸기</div>,
   ];
-  //리턴 {aaa}로 들어갈때는 []와 ,가 사라진다
+  // 리턴 {aaa}로 들어갈때는 []와 ,가 사라진다
   //   return <>{aaa}</>;
 
-  //2번 : 1번이랑 결과 똑같다
+  // 2번 : 1번이랑 결과 똑같다
   const bbb = [
     { number: 1, title: "레드향" },
     { number: 2, title: "샤인머스켓" },
@@ -66,7 +66,7 @@ export default function MapFruitsPage() {
 
   //   return <>{bbb}</>;
 
-  //3번
+  // 3번
 
   return (
     <>

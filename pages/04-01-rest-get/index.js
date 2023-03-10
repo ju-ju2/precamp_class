@@ -21,7 +21,7 @@ export default function RestGetPage() {
   }
 
   // const onClickSync = async () => {}
-  //화살표 함수로 표현할때는 function 앞인 ()앞에 붙여야한다
+  // 화살표 함수로 표현할때는 function 앞인 ()앞에 붙여야한다
 
   return (
     <>
