@@ -5,7 +5,7 @@ import { useState } from "react";
 const MyStar = styled(Rate)``;
 
 export default function LibraryIconPage() {
-  const [value, setValue] = useState(3);
+  const [value, setValue] = useState(0);
 
   return (
     <>
