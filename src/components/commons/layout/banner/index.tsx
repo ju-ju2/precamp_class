@@ -6,5 +6,5 @@ const Wrapper = styled.div`
 `;
 
 export default function LayoutBanner() {
-  return <Wrapper>여기는 배너입니다.</Wrapper>;
+  return <Wrapper>여기는 banner입니다.</Wrapper>;
 }
