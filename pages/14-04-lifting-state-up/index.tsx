@@ -1,0 +1,24 @@
+import Child1 from "../../src/components/units/14-lifting-state-up/Child1";
+import Child2 from "../../src/components/units/14-lifting-state-up/child2";
+import { useState } from "react";
+
+export default function LiftingStateUpPage() {
+  const [count, setCount] = useState(0);
+
+  // 부모의 state 조작 방법 1
+  const onClickCountUp = () => {
+    setCount((prev) => prev + 1);
+  };
+
+  return (
+    <>
+      <Child1
+        count={count}
+        onClickCountUp={onClickCountUp}
+        setCount={setCount}
+      ></Child1>
+      <div>===========================</div>
+      <Child2 count={count} onClickCountUp={onClickCountUp}></Child2>
+    </>
+  );
+}
