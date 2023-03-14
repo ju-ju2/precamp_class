@@ -12,36 +12,48 @@ export default function FunctionLifecyclePage() {
   //   count: 0,
   // };
 
-  // componentDidMount() {
-  //   console.log("그려지고 나서 실행");
-  // }
-  useEffect(() => {
-    console.log("처음만 실행");
-  }, []);
-  // 의존성 배열을 빈칸으로 두면 처음 실행될 때 한번만 실행된다. 바뀔 대상이 없다!
+  // useEffect(() => {
+  //   console.log("처음만 실행");
+  // }, []);
+  // // 의존성 배열을 빈칸으로 두면 처음 실행될 때 한번만 실행된다. 바뀔 대상이 없다!
 
-  // componentDidUpdate() {
-  //   console.log("변경되고 나서 실행 + 처음엔 실행안됨");
-  //   // if (this.state.count === 5)
-  // }
-  useEffect(() => {
-    console.log("변경되고나서 실행 + 처음에도 실행됨");
-  }, [count, qqq]);
-  // 뒤의 []는 의존성 배열이다. []에 들어있는 애가 변경될 때만 useEffect가 실행된다. 의존성 배열이 없으면 뭐 하나라도 바뀌면 무조건 실행
+  // useEffect(() => {
+  //   console.log("변경되고나서 실행 + 처음에도 실행됨");
+  // }, [count, qqq]);
+  // // 뒤의 []는 의존성 배열이다. []에 들어있는 애가 변경될 때만 useEffect가 실행된다. 의존성 배열이 없으면 뭐 하나라도 바뀌면 무조건 실행
 
-  // componentWillUnmount() {
-  //   console.log("사라질때 실행");
-  //   // 채팅방 나가기 api
-  // }
+  // useEffect(() => {
+  //   return () => {
+  //     console.log("사라질때 실행");
+  //   };
+  // }, []);
+
+  // useEffect의 특징
+  // 1. 하나로 합치기 가능
   useEffect(() => {
+    console.log("그려질때 실행");
     return () => {
       console.log("사라질때 실행");
     };
   }, []);
 
+  useEffect(() => {
+    console.log("변경되고나서 실행 + 처음에도 실행됨");
+  });
+
+  console.log("실행");
+  console.log("======");
+
   const onClickCountUp = () => {
     setCount((prev) => prev + 1);
   };
+
+  // 2. useEffect의 잘못된 사용예제 (1. 추가 렌더링, 2. 무한루프)
+  useEffect(() => {
+    setCount((prev) => prev + 1);
+  }, []);
+  // 2-1: 순서는 렌더링 되고 그 다음 useEffect가 실행된다.
+  // 2-2: useEffect에 setCount를 하면 상태가 바뀌어 불필요하게 다시 랜더링 되기 때문에 함께 사용을 지양해야한다.
 
   // onClickCountUp = () => {
   //   this.setState((prev: { count: number }) => ({
@@ -57,6 +69,9 @@ export default function FunctionLifecyclePage() {
   // onClickMove() {
   //   void Router.push("/");
   // }
+
+  console.log("나는 언제 실행되나요~~");
+  // 가장 먼저 실행된 후 useEffect가 실행된다.
 
   return (
     <>
