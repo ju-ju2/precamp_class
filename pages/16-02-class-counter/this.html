@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>this의 이해</title>
+    <script>
+      class Counter {
+        count = 10;
+
+        onClickButton() {
+          console.log("현재 카운트 : ", this.count);
+        }
+
+        // 방법 1) 화살표 함수로 변경하는 방법
+        // 화살표 함수를 사용하면 눈에 보이는 this가 this다.
+        // onClickButton = () => {
+        //   console.log("현재 카운트 : ", this.count);
+        // }
+
+        render() {
+          // 바디에서 직접 버튼을 만들수있다. 자바스크립트로 HTML코드가 만들어지는 방식
+          const button = document.createElement("button");
+          button.innerText = "클릭하세요";
+          button.count = 100;
+          // 방법2 ) bind(this)를 통해 연결시킨다.
+          // this는 동적으로 주체에 따라 바뀐다. 그렇기 때문에 this를 통일시키는 명령이 필요함.
+          button.addEventListener("click", this.onClickButton.bind(this));
+          // body에 버튼을 추가하는 로직
+          document.body.appendChild(button);
+        }
+      }
+
+      // HTML 코드가 읽히고 나면 이 안의 내용을 실행시켜줘
+      window.onload = function () {
+        const counter = new Counter();
+        counter.render();
+      };
+    </script>
+  </head>
+  <body></body>
+</html>
