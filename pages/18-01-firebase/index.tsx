@@ -19,6 +19,7 @@ export default function FirebasePage() {
     const board = collection(getFirestore(firebaseApp), "Board");
     const result = await getDocs(board);
     const datas = result.docs.map((el) => el.data());
+    // result.docs가 배열로 주기때문에 우리는 뽑아와야한다
     console.log(datas);
   };
   return (
