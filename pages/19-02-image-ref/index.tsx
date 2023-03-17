@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import {
   IMutation,
   IMutationUploadFileArgs,
@@ -17,6 +17,7 @@ const UPLOAD_FILE = gql`
 `;
 
 export default function ImageUploadPage() {
+  const fileRef = useRef<HTMLInputElement>(null); // 참조할 변수를 생성 (null): 처음에는 비워져있다
   const [imageUrl, setImageUrl] = useState("");
 
   const [uploadFile] = useMutation<
@@ -39,9 +40,24 @@ export default function ImageUploadPage() {
     }
   };
 
+  const onClickImage = () => {
+    fileRef.current?.click();
+    // test라는 변수를 참조하는 현재 태그를 클릭
+  };
   return (
     <>
-      <input type="file" onChange={onChangeFile}></input>
+      <div
+        style={{ width: "50px", height: "50px", backgroundColor: "gray" }}
+        onClick={onClickImage}
+      >
+        이미지 선택
+      </div>
+      <input
+        style={{ display: "none" }}
+        type="file"
+        onChange={onChangeFile}
+        ref={fileRef} // 변수를 참조하는 태그
+      ></input>
       {/* <input type="file" onChange={onChangeFile} multiple></input> */}
       {/* 사진 여러개 등록하고 싶을때 */}
       <img src={`https://storage.googleapis.com/${imageUrl}`}></img>
