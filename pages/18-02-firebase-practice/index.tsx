@@ -10,7 +10,7 @@ import {
   deleteDoc,
 } from "firebase/firestore/lite";
 import { ChangeEvent, useState } from "react";
-import { firebaseApp } from "../_app";
+import { firebaseApp } from "../../src/commons/libraries/firebase";
 
 const Wrapper = styled.div`
   display: flex;
@@ -54,7 +54,7 @@ export default function FirebasePractice() {
     });
   };
 
-  const onClickShowBoads = async () => {
+  const onClickShowBoards = async () => {
     const myBoard = collection(getFirestore(firebaseApp), "MyBoard");
     const result = await getDocs(myBoard);
     const data = result.docs.map((el) => el.data());
@@ -111,7 +111,7 @@ export default function FirebasePractice() {
           </Row>
         ))}
       </Wrapper>
-      <button onClick={onClickShowBoads}>게시글보기</button>
+      <button onClick={onClickShowBoards}>게시글보기</button>
       {/* <button onClick={onClickGetAll}></button>
   <button onClick={onClickUpdate}></button>
   <button onClick={onClickDelete}></button> */}
