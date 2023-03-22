@@ -15,9 +15,9 @@ interface IApolloSettingProps {
   children: JSX.Element;
 }
 
-const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-
 export default function ApolloSetting(props: IApolloSettingProps) {
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+
   const uploadLink = createUploadLink({
     uri: "http://backendonline.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },
