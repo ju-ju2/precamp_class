@@ -15,6 +15,7 @@ export default function KakaoMapPage() {
       "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9f7ec2c230c4669c85bacfe30e89b7e3";
     document.head.appendChild(script);
     // 쿼리스트링 : 주소에 key와 value값이 여러개 있을때 사이에 & 를 넣으면 & 기준으로 분리되서 요청된다.
+    // 카카오맵 독스: autoload=false 지정함
 
     script.onload = () => {
       window.kakao.maps.load(function () {
@@ -33,12 +34,12 @@ export default function KakaoMapPage() {
   return (
     <>
       {/* JSX 문법이라 HEAD부분이 따로 없다. 불러와주기  */}
-      <Head>
+      {/* <Head>
         <script
           type="text/javascript"
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9f7ec2c230c4669c85bacfe30e89b7e3"
         ></script>
-      </Head>
+      </Head> */}
 
       <div id="map" style={{ width: "500px", height: "400px" }}></div>
     </>
