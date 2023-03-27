@@ -49,7 +49,7 @@ const myBasket = [
 export default function BasketHomework() {
   const onClickBtn = (basket: IBasketsProps) => () => {
     const baskets: IBasketsProps[] = JSON.parse(
-      localStorage.getItem("baskets") ?? "[]"
+      localStorage.getItem("baskets") || "[]"
     );
     console.log(baskets);
 
