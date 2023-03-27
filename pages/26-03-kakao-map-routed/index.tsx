@@ -27,6 +27,18 @@ export default function KakaoMapPage() {
         };
 
         const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
+
+        // //////////////실습 추가 부분 (마커 생성)/////////////////////
+        const position = new window.kakao.maps.LatLng(37.556329, 126.931475);
+
+        // 마커를 생성합니다
+        const marker = new window.kakao.maps.Marker({
+          position,
+        });
+
+        // 마커를 지도에 표시합니다.
+        marker.setMap(map);
+        // //////////////////////////////////////////////////////////
       });
     };
   }, []);
