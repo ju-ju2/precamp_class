@@ -25,11 +25,11 @@ export default function WebEditorPage() {
     void trigger("contents");
   };
 
-  const onClickSubmit = () => {
+  const onClickSubmit = async () => {
     // code-splitting 코드 스플릿팅 방식 // 다운로드 나눠서 하기
     // 전체 기능 중에서 하나만 작동될때, import가 많아지면 렌더링이 늦어질수 밖에 없기 때문에 동작할지도 모르는 기능은 작동할때만 임포트
-    // const { Modal } = dynamic(async () => await import("antd"), { ssr: false });
-    // Modal.success({ content: "등록에 성공하였습니다" });
+    const { Modal } = await import("antd");
+    Modal.success({ content: "등록에 성공하였습니다" });
   };
   return (
     <>
