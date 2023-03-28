@@ -2,10 +2,17 @@
 <!-- https://koreanjson.com/posts/${num} -->
 <!-- https://koreanjson.com/posts?userId=${userId} -->
 
+<!-- 로직설명
+    1 랜덤숫자를 API를 통해 받아오고 
+    2 그 숫자를 코리안 제이슨 포스트 넘버로 넘겨서 조회하고 
+    3 조회한 글의 글쓴이의 아이디를 가져와 글쓴이가 쓴 모든 글을 조회한다 -->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>콜백과 친구들</title>
+        <!-- react에서 다운받은것과 다르게 HTML에서 axios를 사용하려면 주소로 받아야한다 -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
             const myCallback = () => {
                 const aa = new XMLHttpRequest();
@@ -36,7 +43,52 @@
                     });
                 });
             };
-            const myPromise = () => {};
+
+            // Promise 작동 방식
+            // new Promise((resolve, reject) => {
+            //     // 여기서 API 요청을 한다면?
+            //     try {
+            //         const result = "철수";
+            //         resolve(result); // 성공
+            //     } catch (error) {
+            //         reject("실패했습니다"); // 실패
+            //     }
+            // })
+            //     .then((res) => {
+            //         console.log(res); // 철수
+            //     })
+            //     .catch((err) => {
+            //         console.log(err); // 실패했습니다
+            //     });
+
+            // axios 는 promise 를 사용해서 만들어진 라이브러리다.
+            // callback 함수와는 다르게 return 기능이 있다
+            const myPromise = () => {
+                console.log("1번째로 실행됩니다");
+                axios
+                    .get(`http://numbersapi.com/random?min=1&max=200`)
+                    .then((res) => {
+                        console.log("2번째로 실행됩니다");
+                        console.log(res);
+                        const num = res.data.split(" ")[0];
+                        console.log(num);
+                        return axios.get(`https://koreanjson.com/posts/${num}`);
+                    })
+                    .then((res) => {
+                        console.log("3번째로 실행됩니다");
+                        console.log(res);
+                        const userId = res.data.UserId;
+                        console.log(userId);
+                        return axios.get(
+                            `https://koreanjson.com/posts?userId=${userId}`
+                        );
+                    })
+                    .then((res) => {
+                        console.log("4번째로 실행됩니다");
+                        console.log(res);
+                        console.log(res.data);
+                    });
+            };
             const myAsyncAwait = () => {};
         </script>
     </head>
