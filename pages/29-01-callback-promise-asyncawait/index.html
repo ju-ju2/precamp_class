@@ -1,0 +1,53 @@
+<!-- http://numbersapi.com/random?min=1&max=200 -->
+<!-- https://koreanjson.com/posts/${num} -->
+<!-- https://koreanjson.com/posts?userId=${userId} -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>콜백과 친구들</title>
+        <script>
+            const myCallback = () => {
+                const aa = new XMLHttpRequest();
+                aa.open("get", `http://numbersapi.com/random?min=1&max=200`);
+                aa.send();
+                aa.addEventListener("load", function (res) {
+                    console.log(res);
+                    const num = res.target.response.split(" ")[0];
+                    //   공백(띄어쓰기)를 기준으로 쪼개서 배열을 만든 것중 0번째 것
+
+                    const bb = new XMLHttpRequest();
+                    bb.open("get", `https://koreanjson.com/posts/${num}`);
+                    bb.send();
+                    bb.addEventListener("load", function (res) {
+                        console.log(res);
+                        const userId = JSON.parse(res.target.response).UserId;
+                        console.log(userId);
+
+                        const cc = new XMLHttpRequest();
+                        cc.open(
+                            "get",
+                            `https://koreanjson.com/posts?userId=${userId}`
+                        );
+                        cc.send();
+                        cc.addEventListener("load", function (res) {
+                            console.log(res);
+                        });
+                    });
+                });
+            };
+            const myPromise = () => {};
+            const myAsyncAwait = () => {};
+        </script>
+    </head>
+    <body>
+        <button onclick="myCallback()">Callback 연습하기</button>
+        <button onclick="myPromise()">Promise 연습하기</button>
+        <button onclick="myAsyncAwait()">AsyncAwait 연습하기</button>
+    </body>
+</html>
+
+<!-- HTML에 작성하는 이유
+    리액트 상황에서 쓰는 것은 최대한 리액트로 진행하고
+    어떤상황에서도 쓰이는 자바스크립트 상황/
+    리액트, 뷰, 앵귤러 다양한 환경에서 동일한 작동하는것은 HTML -->

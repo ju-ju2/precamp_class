@@ -26,7 +26,10 @@ export default function PaymentPage() {
           // 결제 성공 시 로직
           console.log(rsp);
 
+          // const paymentDate = new Date() // 프론트엔드에서 시간을 만드는건 안됨
+
           // 백엔드에 결제관련 데이터 넘겨주기, => 뮤테이션 실행하기
+          // createPointTransactionOfLoading
         } else {
           // 결제 실패 시 로직
           alert("결제 실패");
