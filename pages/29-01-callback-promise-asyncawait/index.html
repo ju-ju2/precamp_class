@@ -63,6 +63,7 @@
 
             // axios 는 promise 를 사용해서 만들어진 라이브러리다.
             // callback 함수와는 다르게 return 기능이 있다
+            // 하지만 실행순서를 예측하기 힘든 단점이 있다.
             const myPromise = () => {
                 console.log("1번째로 실행됩니다");
                 axios
@@ -89,7 +90,21 @@
                         console.log(res.data);
                     });
             };
-            const myAsyncAwait = () => {};
+            // 실행순서 예측가능
+            const myAsyncAwait = async () => {
+                const result1 = await axios.get(
+                    `http://numbersapi.com/random?min=1&max=200`
+                );
+                const num = result1.data.split(" ")[0];
+                const result2 = await axios.get(
+                    `https://koreanjson.com/posts/${num}`
+                );
+                const userId = result2.data.UserId;
+                const result3 = await axios.get(
+                    `https://koreanjson.com/posts?userId=${userId}`
+                );
+                console.log(result3.data);
+            };
         </script>
     </head>
     <body>
