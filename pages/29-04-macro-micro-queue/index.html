@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>이벤트루프</title>
+    <script>
+      const onclickLoop = () => {
+        console.log("시작");
+        // ////////////////////////////비동기작업(매크로 테스크큐에 들어감)
+        setTimeout(() => {
+          new Promise((resolve, reject) => {
+            resolve("철수");
+          }).then((res) => {
+            console.log(
+              "Promise(setTimeout 안에서 실행되는 친구)!! 마이크로큐!! 0초뒤에 실행"
+            );
+          });
+          console.log("setTimeout!! 매크로큐!! 0초 뒤에 실행!!");
+        }, 0);
+        // ////////////////////////////비동기작업(마이크로 태스트큐에 들어감/ 매크로 태스트큐보다 항상 먼저 실행)
+        new Promise((resolve, reject) => {
+          resolve("철수");
+        }).then((res) => {
+          console.log("Promise(1)!! 마이크로큐!! 0초뒤에 실행");
+        });
+        // ////////////////////////////비동기작업(매크로 태스크큐에 들어감)
+        setInterval(() => {
+          console.log("setInterval!! 매크로큐!! 0초 마다 실행!!");
+        }, 0);
+        // ////////////////////////////
+        let sum = 0;
+        for (let i = 0; i <= 9000000000; ++i) {
+          // sum = sum + 1
+          sum += 1;
+        }
+        // ////////////////////////////비동기작업(마이크로 태스크큐에 들어감/ 매크로 태스트큐보다 항상 먼저 실행)
+        new Promise((resolve, reject) => {
+          resolve("철수");
+        }).then((res) => {
+          console.log("Promise(2)!! 마이크로큐!! 0초뒤에 실행");
+        });
+        console.log("끝");
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onclickLoop()">시작하기</button>
+  </body>
+</html>
+
+<!-- 예상 순서
+  1. 시작!
+  2. for문 실행
+  3. 끝
+  4. Promise(1)
+  5. Promise(2)
+  6. setTimeout
+  7. Promise(setTimeout)
+  8. setInterval -->
