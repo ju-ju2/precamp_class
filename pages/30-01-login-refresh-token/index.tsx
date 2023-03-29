@@ -6,12 +6,13 @@ import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../src/commons/store";
 import {
   IMutation,
-  IMutationLoginUserArgs,
+  IMutationLoginUserExampleArgs,
 } from "../../src/commons/types/generated/types";
 
-const LOGIN_USER = gql`
+// loginUser 와는 다르게 5초마다 토큰이 만료된다. 리프레시 토큰을 위한 임시 API
+const LOGIN_USER_EXAMPLE = gql`
   mutation typesetting($password: String!, $email: String!) {
-    loginUser(password: $password, email: $email) {
+    loginUserExample(password: $password, email: $email) {
       accessToken
     }
   }
@@ -23,10 +24,10 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [loginUser] = useMutation<
-    Pick<IMutation, "loginUser">,
-    IMutationLoginUserArgs
-  >(LOGIN_USER);
+  const [loginUserExample] = useMutation<
+    Pick<IMutation, "loginUserExample">,
+    IMutationLoginUserExampleArgs
+  >(LOGIN_USER_EXAMPLE);
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -37,13 +38,13 @@ export default function LoginPage() {
   const onClickLogin = async () => {
     try {
       // 1. 로그인 해서 accessToken 받아오기
-      const result = await loginUser({
+      const result = await loginUserExample({
         variables: {
           email,
           password,
         },
       });
-      const accessToken = result.data?.loginUser.accessToken;
+      const accessToken = result.data?.loginUserExample.accessToken;
       console.log(accessToken);
 
       // 2. accessToken을 global state에 저장하기  // 스코프체인 특성으로 바로 위의 accessToken을 가져옴
@@ -54,7 +55,7 @@ export default function LoginPage() {
       setAccessToken(accessToken);
 
       // 3. 로그인 성공 페이지로 넘어가기
-      void router.push("/22-02-login-success");
+      void router.push("/30-02-login-refresh-token-success");
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }

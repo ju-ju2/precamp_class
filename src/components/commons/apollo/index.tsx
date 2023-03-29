@@ -2,11 +2,14 @@ import {
   ApolloClient,
   ApolloLink,
   ApolloProvider,
+  fromPromise,
   InMemoryCache,
 } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import { createUploadLink } from "apollo-upload-client";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import { getAccessToken } from "../../../commons/libraries/getAccessToken";
 import { accessTokenState } from "../../../commons/store";
 
 const GLOBAL_STATE = new InMemoryCache();
@@ -47,13 +50,44 @@ export default function ApolloSetting(props: IApolloSettingProps) {
     if (result) setAccessToken(result);
   }, []);
 
+  // 에러를 캐치하고 캐치한 에러가 토큰만료면 재발급 받은 후, 기존의 쿼리를 포워드해서 다시 날려준다.
+  const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+    // 1-1. 에러를 캐치
+    if (graphQLErrors) {
+      for (const err of graphQLErrors) {
+        // 1-2. 해당 에러가 토큰만료 에러인지 체크(UNAUTHENTICATED)
+        if (err.extensions.code === "UNAUTHENTICATED") {
+          return fromPromise(
+            // 2-1. refreshToken으로 accessToken을 재발급
+            // (아폴로 세팅중이라 gql, 뮤테이션 등을 이 펭지에선 못한다. 하지만 graphql도 rest-api이기 때문에 불러올수있다. 절차가 복잡해서 graphql-request 라이브러리를 다운받는다.)
+            // 리프레시 토큰을 쿠키에 담아올것인데, 보안이 강화된 https에 밖에 못가서 옵션을 추가해야 한다.
+            getAccessToken().then((newAccessToken) => {
+              // 2-2. 재발급 받은 accessToken 저장하기
+              setAccessToken(newAccessToken);
+
+              // 3-1. 재발급 받은 accessToken으로 방금 실패한 쿼리의 정보 수정하기
+              if (typeof newAccessToken !== "string") return;
+              operation.setContext({
+                headers: {
+                  ...operation.getContext().headers, // 만료된 토큰이 추가되어 있는 상태
+                  Authorization: `Bearer ${newAccessToken}`, // 토큰만 새것으로 바꿔치기
+                },
+              });
+            })
+          ).flatMap(() => forward(operation)); // 3-2. 방금 수정한 쿼리 재요청하기
+        }
+      }
+    }
+  });
+
   const uploadLink = createUploadLink({
-    uri: "http://backendonline.codebootcamp.co.kr/graphql",
+    uri: "https://backendonline.codebootcamp.co.kr/graphql", // https 로 변경(토큰 정보를 쿠키에 담을 수 있게)
     headers: { Authorization: `Bearer ${accessToken}` },
+    credentials: "include", // https 변경으로 추가된 조건
   });
 
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
+    link: ApolloLink.from([errorLink, uploadLink as unknown as ApolloLink]),
     // cache: new InMemoryCache(),
     cache: GLOBAL_STATE,
   });
