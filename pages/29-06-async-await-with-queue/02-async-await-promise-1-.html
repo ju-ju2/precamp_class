@@ -14,7 +14,7 @@
 
         async function bbb() {
           console.log("bbb-시작");
-          await ccc();
+          await ccc(); // 여기가 포인트!! await는 ccc와는 관련이 없다.
           console.log("bbb-끝");
         }
 
