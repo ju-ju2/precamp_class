@@ -42,12 +42,18 @@ export default function ApolloSetting(props: IApolloSettingProps) {
     // console.log("지금은 프론트엔드 서버다");
   }
 
-  // 3. 프리랜더링 무시 - useEffect
+  // 3. 프리랜더링 무시 - useEffect // 새로고침할 때 문제 해결
   useEffect(() => {
-    console.log("지금은 브라우저다");
-    const result = localStorage.getItem("accessToken");
-    console.log(result);
-    if (result) setAccessToken(result);
+    // 1. 기본방식 (refreshToken 이전)
+    // console.log("지금은 브라우저다");
+    // const result = localStorage.getItem("accessToken");
+    // console.log(result);
+    // if (result) setAccessToken(result);
+
+    // 2. 새로운방식 (refreshToken 이후)
+    void getAccessToken().then((newAccessToken) => {
+      setAccessToken(newAccessToken);
+    });
   }, []);
 
   // 에러를 캐치하고 캐치한 에러가 토큰만료면 재발급 받은 후, 기존의 쿼리를 포워드해서 다시 날려준다.
