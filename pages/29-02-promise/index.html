@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Promise연습</title>
+    <script>
+      const onclickThen = () => {
+        new Promise((resolve, reject) => {
+          // 시간이 걸리는 작업(ex, API보내기)
+          // ..
+          setTimeout(() => {
+            try {
+              const res = "철수"; // 2초 걸려서 백엔드에서 철수를 받아온다고 가정
+              resolve(res); // 성공하면 이거 실행
+            } catch (err) {
+              reject("에러발생"); // 실패하면 이거 실행
+            }
+          }, 2000);
+        }).then((res) => {
+          console.log(res); ////// 최종결과 : 철수
+        });
+      };
+      const onclickAwait = async () => {
+        // const result = await axios.get()
+        const result = await new Promise((resolve, reject) => {
+          // 시간이 걸리는 작업(ex, API보내기)
+          // ..
+          setTimeout(() => {
+            try {
+              const res = "철수"; // 2초 걸려서 백엔드에서 철수를 받아온다고 가정
+              resolve(res); // 성공하면 이거 실행
+            } catch (err) {
+              reject("에러발생"); // 실패하면 이거 실행
+            }
+          }, 2000);
+        });
+        console.log(result); ////// 최종결과 : 철수
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onclickThen()">Promise 실행하기(.then)</button>
+    <button onclick="onclickAwait()">Promise 실행하기(await)</button>
+  </body>
+</html>

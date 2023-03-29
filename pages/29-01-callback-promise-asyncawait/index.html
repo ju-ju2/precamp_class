@@ -61,7 +61,7 @@
             //         console.log(err); // 실패했습니다
             //     });
 
-            // axios 는 promise 를 사용해서 만들어진 라이브러리다.
+            // axios 는 promise 를 사용해서 만들어진 라이브러리다. Promise를 리턴하기 때문에 .then이 가능
             // callback 함수와는 다르게 return 기능이 있다
             // 하지만 실행순서를 예측하기 힘든 단점이 있다.
             const myPromise = () => {
@@ -91,6 +91,9 @@
                     });
             };
             // 실행순서 예측가능
+            // axios, fetch 등 => 대표적인 Promise(.then 등의 기능) 를 지원하는 기능
+            // 1. .then의 활용
+            // 2. await 활용   **주의) await를 아무데나 붙인다고 기다리는게 아님/ promise를 지원
             const myAsyncAwait = async () => {
                 const result1 = await axios.get(
                     `http://numbersapi.com/random?min=1&max=200`
