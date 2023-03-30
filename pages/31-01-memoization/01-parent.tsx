@@ -48,7 +48,7 @@ export default function MemoizationParentsPage() {
 
       <button onClick={onClickCountState}>카운트(state) +1 올리기</button>
       <div>---------------------</div>
-      <MemoizationChildPage />
+      <MemoizationChildPage countState={countState} />
     </>
   );
 }
