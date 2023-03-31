@@ -1,0 +1,8 @@
+npm / react-lazyload : 스크롤 할때 소스 다운
+npm / react-dropzone : 이미지 클릭해서 선택하는게 아니라 드래그 앤 드랍 방식으로 실행할 때 onChangeFile 실행하도록
+npm / react-avatar-editor : 마이페이지에 들어가는 아바타 이미지 커스텀
+npm / react-beautiful-dnd : trello(일정관리 어플) 처럼 협업 및 스케줄 관리할 때 쓸 수 있음. 포트폴리오 참고
+google page speed insights : 웹페이지 속도 측정
+이미지 파일을 webp파일로 바꾸기 (jpg to webp) : 용량 줄이기
+크롬 와팔라이저(wappalyzer) : 사이트가 어떤 기술을 사용해서 만들어졌는지 알려줌
+코드너리 : 회사들이 어떤 기술 스택들을 사용하는지
