@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>프리로드</title>
+    <!-- 해당 로직이 없다면 ? 순서대로 6개씩 끊어서 동시에 가져올 수 있기때문에 사진은 늦게 가져오게 된다 -->
+    <!-- 하지만 버튼 기능 같은 것들 보다 이미지가 먼저 뜨는게 중요하므로 이미지 링크를 먼저 가져와야한다. -->
+    <!-- 아래 문구 추가가면 이미지를 먼저 받아오게 된다. -->
+    <link rel="preload" as="image" href="./internsheep.jpg" />
+    <!--  -->
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index1.js"></script>
+    <script src="./index2.js"></script>
+    <script src="./index3.js"></script>
+    <script src="./index4.js"></script>
+    <script src="./index5.js"></script>
+    <script src="./index6.js"></script>
+  </head>
+  <body>
+    <img src="./internsheep.jpg" />
+  </body>
+</html>
+
+<!-- 프리패치와 프리로드의 차이 -->
+<!-- 프리패치는 다음페이지에 쓰려로 미리 받는거지만 제일 나중에 받게 된다 -->
+<!-- 프리로드는 현재 페이지에서 쓸껀데 다운로드 순서 수정하여 먼저 받게 하는 것 -->
