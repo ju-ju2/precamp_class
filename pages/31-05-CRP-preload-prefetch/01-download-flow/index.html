@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>리소스 다운로드 순서</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script>
+      alert("정지");
+    </script>
+  </head>
+  <body>
+    <script src="./index.js"></script>
+  </body>
+</html>
+
+<!-- 1. html을 받아와서 일단 주소부터 골라내 백그라운드에서 요청을 한다. -->
+<!-- 2. 이후 한줄 한줄 실행함. -->
+<!-- 주의 : 헤드가 끝나고 보내는거 아님 -->
