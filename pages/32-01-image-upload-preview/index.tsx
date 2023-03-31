@@ -52,7 +52,7 @@ export default function ImageUploadPage() {
     fileReader.readAsDataURL(file);
     fileReader.onload = (event) => {
       if (typeof event.target?.result === "string") {
-        console.log(event.target?.result);
+        console.log(event.target?.result); // 게시판에서 event.target.id 대신 event.currentTarget.id 썼던 이유 -> event.target은 태그만을 가르키지 않음
         setImageUrl(event.target?.result);
       }
     };
