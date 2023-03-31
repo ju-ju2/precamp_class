@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>프로미스 ALL</title>
+    <script>
+      // 시간이 걸리는 작업을 따로 하는 로직 //
+      const startPromise = async () => {
+        console.time("==개별프로미스");
+        const result1 = await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("성공");
+          }, 2000);
+        });
+        const result2 = await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("성공");
+          }, 3000);
+        });
+        const result3 = await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("성공");
+          }, 1000);
+        });
+        console.timeEnd("==개별프로미스");
+      };
+
+      // 시간이 걸리는 작업을 동시에 하는 로직
+      const startPromiseAll = async () => {
+        // await Promise.all([promise, promise, promise])
+        console.time("==프로미스 all");
+
+        const result = await Promise.all([
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("성공");
+            }, 2000);
+          }),
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("성공");
+            }, 3000);
+          }),
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("성공");
+            }, 1000);
+          }),
+        ]);
+        console.log(result);
+        console.timeEnd("==프로미스 all");
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="startPromise()">프로미스 연습하기</button>
+    <button onclick="startPromiseAll()">프로미스 all 연습하기</button>
+  </body>
+</html>
