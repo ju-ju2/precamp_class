@@ -6,6 +6,7 @@ import {
   IQueryFetchBoardsArgs,
 } from "../../src/commons/types/generated/types";
 import { useRouter } from "next/router";
+import _ from "lodash";
 
 const FETCH_BOARDS = gql`
   query typeSetting($page: Int) {
@@ -40,14 +41,25 @@ export default function StaticRoutedPage() {
   console.log(data);
   console.log(data?.fetchBoards);
 
-  const prefetchBoard = (boardId: string) => async () => {
-    // useQuery
-    // useLazyQuery
-    // useApolloClient
+  const getDebounce = _.debounce(async (boardId) => {
     await client.query({
       query: FETCH_BOARD,
       variables: { boardId },
     });
+  }, 500);
+
+  const prefetchBoard = (boardId: string) => async () => {
+    // useQuery
+    // useLazyQuery
+    // useApolloClient
+
+    // 아래는 마우스를 갖다 대기만해도 프리페치를 해버려 쓸데없이 데이터를 요청하는 문제가 있다.
+    // 디바운싱을 통해 n초 뒤 가장 마지막 부분만 패치하도록 한다.
+    // await client.query({
+    //   query: FETCH_BOARD,
+    //   variables: { boardId },
+    // });
+    await getDebounce(boardId);
   };
 
   const onClickMove = (boardId: string) => () => {
