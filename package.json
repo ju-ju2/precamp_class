@@ -43,7 +43,7 @@
     "@graphql-codegen/cli": "^3.2.1",
     "@graphql-codegen/typescript": "^3.0.1",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^14.0.0",
+    "@testing-library/react": "^12.1.2",
     "@types/apollo-upload-client": "^17.0.2",
     "@types/dompurify": "^3.0.0",
     "@types/lodash": "^4.14.191",
